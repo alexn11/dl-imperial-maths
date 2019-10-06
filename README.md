@@ -15,38 +15,84 @@ Topics covered in this course will include:
 
 There is a course website where registrations can be made and further logistical details can be found [here](https://www.deeplearningmathematics.com).
 
-## Course tutors
-
-### Kevin Webster
-
-[Kevin](https://www.linkedin.com/in/kevin-webster-095aba59/) obtained his PhD in 2003 from the Department of Mathematics at Imperial College, in the area of dynamical systems. He has also held postdoctorate positions at Imperial College, and was awarded a Marie Curie Individual Fellowship, which he spent at the Potsdam Institute for Climate Impact Modelling in Germany. During these positions his research interests became more focused on machine learning, and specifically adapting ML technologies for numerical analysis problems in dynamical systems. He was the Head of Research at the London music AI startup Jukedeck, where he oversaw the development of the deep learning framework for automatic music composition. In 2018 he set up his own machine learning consultancy, [FeedForward](http://www.feedforwardai.com/), with a focus on the music & the creative industries. His particular interest in the field of deep learning is generative modelling. [@kn_webster](https://twitter.com/kn_webster) / [kevin.webster@imperial.ac.uk](mailto:kevin.webster@imperial.ac.uk)
-
-### Pierre Richemond
-
-[Pierre](https://www.linkedin.com/in/pierre-h-richemond-2353683/) is currently researching his PhD in deep reinforcement learning at the Data Science Institute of Imperial College. He also helps run the [Deep Learning Network](http://www.dlnetwork.org/) and organize thematic reading groups there. Prior to that, he has worked in electronics as a research engineer and in quantitative finance as a trader. He has studied electrical engineering at ENST, probability theory and stochastic processes at Universite Paris VI - Ecole Polytechnique, and business management at HEC. His other research interests in the field of deep learning include neural network theory, as well as stochastic optimization methods. [@KloudStrife](https://twitter.com/KloudStrife) / [p.richemond17@imperial.ac.uk](mailto:p.richemond17@imperial.ac.uk)
-
-## Guest tutors
-
-We are grateful to **Kai Arulkumaran** for providing PyTorch notebooks for the course and teaching two of the demonstration classes on PyTorch.
-
-[Kai](https://www.linkedin.com/in/kailasharul) is currently researching his PhD in deep learning at the Department of Bioengineering at Imperial College. During his PhD he has been a research intern at Microsoft Research, Twitter Magic Pony, Facebook AI Research and DeepMind. He also founded the [Deep Learning Network](http://dlnetwork.org) at Imperial College to organise guest lectures and a reading group on the topic of deep learning. He is an advocate for open-source software and a well-known contributor to the Torch/PyTorch ecosystems. Before his PhD he studied computer science at the University of Cambridge and worked as a web developer. [@KaiLashArul](https://twitter.com/KaiLashArul) / [kailash.arulkumaran13@imperial.ac.uk](mailto:kailash.arulkumaran13@imperial.ac.uk)
-
 ## Coursework
 
-This repository contains the notebooks for the TensorFlow/PyTorch tutorials as well as details for the coursework, for students that wish to take this course for credit. 
+This fork contains my own answers to the coursework in the directory answers. Each answer is contained in its own directory numeroted according to the assignement number.
 
-Students are recommended to fork this repository and add their solutions to the assignments (as python scripts) in their forked repository. The coursework will be assessed orally following completion of the course.
+Note: since the end of course and the submission of my answers, TensorFlow version 2 has been released. This new version requires to adapt the implementation of ealier program using TensorFlow. I have used Tensorflow 2 in my answer from Assignement 2 on.
 
-### Software requirements
+### Assignement 1
 
-To complete the coursework and run the notebooks you will need to install Tensorflow and PyTorch (as well as other scientific packages, especially numpy). These can be installed using pip; alternatively Tensorflow/PyTorch can be installed using Anaconda (preferred for PyTorch). Jupyter is conveniently installed with Anaconda, or it can also be installed using pip. Relevant links are given below:
+This assigement is the implementation of a simple linear model using the basic functionalities of the TensorFlow library.
 
-* Installing anaconda: [https://www.anaconda.com/download/](https://www.anaconda.com/download/)
-* Installing Jupyter: [https://jupyter.readthedocs.io/en/latest/install.html](https://jupyter.readthedocs.io/en/latest/install.html)
-* Installing Tensorflow via Anaconda: [https://www.anaconda.com/blog/developer-blog/tensorflow-in-anaconda/](https://www.anaconda.com/blog/developer-blog/tensorflow-in-anaconda/)
-* Installing Tensorflow using pip: [https://www.tensorflow.org/install/](https://www.tensorflow.org/install/)
-* Installing PyTorch via Anaconda/pip: [https://pytorch.org/get-started/locally/](https://pytorch.org/get-started/locally/)
-* Installing torchtext via pip (Anaconda install unavailable): [https://github.com/pytorch/text](https://github.com/pytorch/text)
-* Installing OpenAI Gym using pip (Anaconda install unavailable): [https://gym.openai.com/docs/](https://gym.openai.com/docs/)
+This answer use a previous version of TensorFlow.
 
-The PyTorch notebooks require Python 3. Different Python versions can be managed via Anaconda.
+### Assignement 2
+
+This assignement is about solving the MNIST classification problem by using a simple dense layer model.
+
+I use Keras sequential model to create the model.
+
+The modifiable model and training parameters of the models are as follows:
+- the number of dense layers and their respective sizes,
+- the activation function used for all the layers (except the last one),
+- the optimizer,
+- the number of training epochs and the batch size.
+
+I have tested several models with varying number of layers and sizes. The following results are plotted for each model:
+- number of parameters,
+- training loss and accuracy,
+- final test loss and accuracy,
+- training time for each epoch
+- the total training time.
+
+Two sets of models have been trained.
+
+The larger one contains 12 models which have been trained for 10 epochs with resulting test accuracies from 9.73 to 9.82. Model "M2" from this set is the one with most parameters and longest training time.
+
+The smaller set of models contains 4 different models trained for 35 epochs. The resulting test accuracies are from 9.75 to sliglty above 9.82. There seems to be a strong postive correlation between the number of parameters of the model and the resulting accuracy except for large models. Indeed models "M0" and "M3" are the models with the most parameters, with M3 having much more than M0. Despite this, the resulting accuracies seem to be rougly equal.
+
+Other aspects that could have been explored is the dependence of the duration of the training on the type of optimizer (all the models have used the "rmsprop" optimizer). Also it owuld be interesting to compare the model performances for different activation functions.
+
+### Assignement 3
+
+This assignement is about solving the MNIST classification problem by using a model based on a convoluational neural network.
+
+Using Keras sequential model I have implemented a few models.
+
+The modifiable model and training parameters are:
+- the number of convolutional layers and for each layer:
+  - the number of filters and their respective sizes,
+  - the strides,
+  - the use of batch renormalization (boolean),
+  - the activation function,
+  - the size of the max pooling layer,
+  - the dropout rate;
+- the number of dense layers (following the convolutional layers) and for each layer:
+  - the size,
+  - the activation function;
+- the number of training epochs,
+- the batch size.
+
+I have a implemented and tested some arbitrary model (2 convolutional layers and 2 hidden dense layers) and some good example found on Kaggle [https://www.kaggle.com/c/digit-recognizer/overview]. The program have been improved compare to the assignement 2 and now plots the accuracy and loss evaluated on the test sets after each training epochs.
+
+The final accuracy is above 0.99 for the first model (arbitrary model) after 40 epochs and a comparable result for the Kaggle model. I think the main reason for the succes of the first model is its size. This gives more than enough room for learning the proper fit and probably a lot of redundancy. The Kaggle model achieves its performance with much less parameters.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
